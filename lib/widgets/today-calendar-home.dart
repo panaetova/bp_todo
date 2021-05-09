@@ -73,6 +73,9 @@ class _TodayCalendarHomeState extends State<TodayCalendarHome> {
         (filterType == "calendar")
             ? TableCalendar(
           calendarController: controller,
+          onDaySelected: (day, events, dynamics) {
+            print(day.toString());
+          },
           startingDayOfWeek: StartingDayOfWeek.monday,
           initialCalendarFormat: CalendarFormat.week,)
             : Container(),

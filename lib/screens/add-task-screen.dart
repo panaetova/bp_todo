@@ -335,11 +335,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         onPressed: () {
                           if (newTaskTitle != null) {
-                            Task task = Task(title: newTaskTitle);
+                            Task task = Task(title: newTaskTitle, priority: _priority);
                             if (newTaskNotes != null) {
                               task.notes.add(newTaskNotes);
                             }
-                            task.priority = _priority;
                             _labels = _labels.toSet().toList();
                             task.labels = _labels;
                             Provider.of<TaskData>(context, listen: false)
