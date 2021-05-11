@@ -19,6 +19,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskTitle;
   String newTaskNotes;
   String now = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  DateTime dateTime =  DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
   int newColor = 0xFFc1c8c7;
 
@@ -169,7 +170,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (context) => SetDateScreen(),
+                            builder: (context) => SetDateScreen(
+                              receiveData: (setDateTime) {
+                                setState(() {
+                                  dateTime = setDateTime;
+                                  print(dateTime.toString());
+                                  now = DateFormat("dd-MM-yyyy").format(dateTime);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
                           );
                         },
                         child: Container(
@@ -335,7 +345,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         onPressed: () {
                           if (newTaskTitle != null) {
-                            Task task = Task(title: newTaskTitle, priority: _priority);
+                            Task task = Task(title: newTaskTitle, priority: _priority, dateTime: dateTime);
                             if (newTaskNotes != null) {
                               task.notes.add(newTaskNotes);
                             }

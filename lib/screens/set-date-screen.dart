@@ -4,9 +4,12 @@ import 'package:table_calendar/table_calendar.dart';
 
 class SetDateScreen extends StatelessWidget {
   CalendarController controller = new CalendarController();
-  String today = DateFormat("EEEE").format(DateTime.now());
   DateTime tomorrow = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
   DateTime nextWeek = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 7);
+
+  final Function(DateTime) receiveData;
+
+  SetDateScreen({Key key, this.receiveData}) : super(key: key);
 
 
   @override
@@ -32,38 +35,48 @@ class SetDateScreen extends StatelessWidget {
                  ],
                ),
                 Divider(),
-                Row(
-                  children: [
-                    Icon(Icons.wb_sunny_outlined, color: Colors.orange, size: 22,),
-                    SizedBox(width: 10,),
-                    Text("Tomorrow", style: TextStyle(fontSize: 15),),
-                    Expanded(child: SizedBox()),
-                    Text(DateFormat("EEEE").format(tomorrow), style: TextStyle(color: Colors.grey),),
-                  ],
+                InkWell(
+                  onTap: () => receiveData(tomorrow),
+                  child: Row(
+                    children: [
+                      Icon(Icons.wb_sunny_outlined, color: Colors.orange, size: 22,),
+                      SizedBox(width: 10,),
+                      Text("Tomorrow", style: TextStyle(fontSize: 15),),
+                      Expanded(child: SizedBox()),
+                      Text(DateFormat("EEEE").format(tomorrow), style: TextStyle(color: Colors.grey),),
+                    ],
+                  ),
                 ),
                 Divider(),
-                Row(
-                  children: [
-                    Icon(Icons.calendar_today, color: Colors.purple, size: 20,),
-                    SizedBox(width: 13,),
-                    Text("Nex Week", style: TextStyle(fontSize: 15),),
-                    Expanded(child: SizedBox()),
-                    Text(DateFormat("EEEE").format(nextWeek), style: TextStyle(color: Colors.grey),),
-                  ],
+                InkWell(
+                  onTap: () => receiveData(nextWeek),
+                  child: Row(
+                    children: [
+                      Icon(Icons.calendar_today, color: Colors.purple, size: 20,),
+                      SizedBox(width: 13,),
+                      Text("Nex Week", style: TextStyle(fontSize: 15),),
+                      Expanded(child: SizedBox()),
+                      Text(DateFormat("EEEE").format(nextWeek), style: TextStyle(color: Colors.grey),),
+                    ],
+                  ),
                 ),
                 Divider(),
-                Row(
-                  children: [
-                    Icon(Icons.close, color: Colors.grey, size: 22,),
-                    SizedBox(width: 11,),
-                    Text("No date", style: TextStyle(fontSize: 15),)
-                  ],
+                InkWell(
+                  onTap: () => receiveData(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)),
+                  child: Row(
+                    children: [
+                      Icon(Icons.close, color: Colors.grey, size: 22,),
+                      SizedBox(width: 11,),
+                      Text("No date", style: TextStyle(fontSize: 15),)
+                    ],
+                  ),
                 ),
                 Divider(),
                 TableCalendar(
                   calendarController: controller,
                   startingDayOfWeek: StartingDayOfWeek.monday,
-                initialCalendarFormat: CalendarFormat.month,)
+                initialCalendarFormat: CalendarFormat.month,
+                onDaySelected: (DateTime selectDay, events, dynamics) => receiveData(selectDay),)
               ],
             ),
           ),

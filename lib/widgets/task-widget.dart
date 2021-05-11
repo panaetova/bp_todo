@@ -3,6 +3,7 @@ import 'package:bp_todo/domain/priority-choices.dart';
 import 'package:bp_todo/widgets/label-in-task-widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
 class TaskWidget extends StatelessWidget {
   final String taskTitle;
@@ -12,6 +13,7 @@ class TaskWidget extends StatelessWidget {
   final Function pressForData;
   final Priority priority;
   final List<Label> labels;
+  final DateTime dateTime;
 
   TaskWidget(
       {this.isChecked,
@@ -21,7 +23,8 @@ class TaskWidget extends StatelessWidget {
       this.pressForData,
       Key key,
       @required this.priority,
-      @required this.labels})
+      @required this.labels,
+      @required this.dateTime})
       : super(key: key);
 
   @override
@@ -100,7 +103,7 @@ class TaskWidget extends StatelessWidget {
                               color: Colors.black,
                               fontSize: 16,
                             )),
-                        LabelWidget(labels: labels)
+                        LabelWidget(labels: labels),
                       ],
                     ),
               Expanded(child: Container()),

@@ -7,14 +7,14 @@ class Task {
   String title;
   bool isDone;
   Priority priority;
-  Day day;
+  DateTime dateTime;
   List<Label> labels = [];
   List<String> notes = [];
   List<String> subtasks = [];
   List<String> finishedSubtasks = [];
   bool isCheckedLabel = false;
 
-  Task({this.title, this.isDone = false, this.priority});
+  Task({this.title, this.isDone = false, this.priority, this.dateTime});
 
   void doneTask() {
     isDone = !isDone;

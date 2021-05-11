@@ -89,7 +89,7 @@ class TaskBody extends StatelessWidget {
                       isScrollControlled: true,
                       builder: (context) => DataTaskScreen(task: task, taskData: taskData,));
                 },
-                priority: task.priority, labels: task.labels,
+                priority: task.priority, labels: task.labels, dateTime: task.dateTime,
               );
             },
           ),
