@@ -34,7 +34,7 @@ class TaskWidget extends StatelessWidget {
       actionExtentRatio: 0.3,
       secondaryActions: <Widget>[
         Container(
-          height: 50,
+          height: labels.isEmpty ? 50 : 60,
           child: IconSlideAction(
             caption: 'Delete',
             color: Color(priority.color),
@@ -44,7 +44,7 @@ class TaskWidget extends StatelessWidget {
         )
       ],
       child: Container(
-        height: 60,
+        height: labels.isEmpty ? 60 : 70,
         margin: EdgeInsets.only(left: 10, top: 5, bottom: 5),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
@@ -93,11 +93,14 @@ class TaskWidget extends StatelessWidget {
                       overflow: TextOverflow.clip,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 18,
                       )),
-                  Row(
+                  SizedBox(height: 3,),
+                  Column(
                     children: [
+                      dateTimeString == "No Date" ? Container() :
                       DateInTaskWidget(dateTimeString: dateTimeString),
+                      SizedBox(height: 3,),
                       LabelInTaskWidget(labels: labels),
                     ],
                   ),

@@ -7,7 +7,13 @@ class DateInTaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(dateTimeString, style: TextStyle(color: Colors.redAccent),);
+    return Row(
+      children: [
+        Icon(Icons.calendar_today, color: Colors.redAccent, size: 13,),
+        SizedBox(width: 3,),
+        Text(dateTimeString, style: TextStyle(color: Colors.redAccent, fontSize: 13),),
+      ],
+    );
   }
 
 

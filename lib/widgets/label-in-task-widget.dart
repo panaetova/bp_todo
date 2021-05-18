@@ -15,7 +15,7 @@ class LabelInTaskWidget extends StatelessWidget {
 
   Iterable<Widget> labelList() sync* {
     for (final Label label in labels) {
-      yield Text(label.title);
+      yield Text(label.title, style: TextStyle(fontSize: 12),);
     }
   }
 }
