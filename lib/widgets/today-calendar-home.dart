@@ -2,13 +2,13 @@ import 'package:bp_todo/widgets/task-body.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class TodayCalendarHome extends StatefulWidget {
+class InboxCalendarHome extends StatefulWidget {
   @override
-  _TodayCalendarHomeState createState() => _TodayCalendarHomeState();
+  _InboxCalendarHomeState createState() => _InboxCalendarHomeState();
 }
 
-class _TodayCalendarHomeState extends State<TodayCalendarHome> {
-  String filterType = "today";
+class _InboxCalendarHomeState extends State<InboxCalendarHome> {
+  String filterType = "inbox";
   DateTime today = new DateTime.now();
   List<String> monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   CalendarController controller = new CalendarController();
@@ -28,9 +28,9 @@ class _TodayCalendarHomeState extends State<TodayCalendarHome> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                      changeFilter("today");
+                      changeFilter("inbox");
                     },
-                    child: Text("Today",
+                    child: Text("Inbox",
                         style: TextStyle(color: Colors.white, fontSize: 18)),
                   ),
                   SizedBox(
@@ -39,7 +39,7 @@ class _TodayCalendarHomeState extends State<TodayCalendarHome> {
                   Container(
                     height: 4,
                     width: 120,
-                    color: (filterType == "today")
+                    color: (filterType == "inbox")
                         ? Colors.white
                         : Colors.transparent,
                   ),

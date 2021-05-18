@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ignore: missing_return
   Widget getBody() {
     if (sectionIndex == 0) {
-      return TodayCalendarHome();
+      return InboxCalendarHome();
     } else if (sectionIndex == 1)
       return ProjectBody();
   }

@@ -8,7 +8,6 @@ import 'package:bp_todo/domain/task.dart';
 import 'package:bp_todo/screens/set-date-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class AddTaskScreen extends StatefulWidget {
   @override
@@ -18,8 +17,8 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskTitle;
   String newTaskNotes;
-  String now = DateFormat("dd-MM-yyyy").format(DateTime.now());
-  DateTime dateTime =  DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  String dateTimeString = "No Date";
+  DateTime dateTime;
 
   int newColor = 0xFFc1c8c7;
 
@@ -77,7 +76,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 SizedBox(
                                   width: 3,
                                 ),
-                                Text('FOLDER',
+                                Text('INBOX',
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.blueAccent)),
@@ -171,11 +170,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) => SetDateScreen(
-                              receiveData: (setDateTime) {
+                              receiveData: (setDateTimeString, setDateTime) {
                                 setState(() {
+                                  dateTimeString = setDateTimeString;
                                   dateTime = setDateTime;
-                                  print(dateTime.toString());
-                                  now = DateFormat("dd-MM-yyyy").format(dateTime);
                                 });
                                 Navigator.of(context).pop();
                               },
@@ -196,11 +194,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 SizedBox(
                                   width: 3,
                                 ),
-                                Text(
-                                  now,
+                                Text(dateTimeString,
                                   style: TextStyle(
                                       color: Colors.green, fontSize: 15),
-                                ),
+                                )
                               ],
                             ),
                           ),
