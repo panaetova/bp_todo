@@ -38,7 +38,7 @@ class SetDateScreen extends StatelessWidget {
                 Divider(),
                 InkWell(
                   onTap: () {
-                    String tomorrowString = DateFormat("dd-mm-yyyy").format(tomorrow);
+                    String tomorrowString = DateFormat.MMMMd('en_US').format(tomorrow);
                     receiveData(tomorrowString, tomorrow);
                   },
                   child: Row(
@@ -54,7 +54,7 @@ class SetDateScreen extends StatelessWidget {
                 Divider(),
                 InkWell(
                   onTap: () {
-                    String nextWeekString = DateFormat("dd-mm-yyyy").format(nextWeek);
+                    String nextWeekString = DateFormat.MMMMd('en_US').format(nextWeek);
                     receiveData(nextWeekString, nextWeek);
                   },
                   child: Row(
@@ -84,7 +84,7 @@ class SetDateScreen extends StatelessWidget {
                   startingDayOfWeek: StartingDayOfWeek.monday,
                 initialCalendarFormat: CalendarFormat.month,
                 onDaySelected: (DateTime selectDay, events, dynamics) {
-                  String selectDayString = DateFormat("dd-mm-yyyy").format(selectDay);
+                  String selectDayString = DateFormat.MMMMd('en_US').format(selectDay);
                   receiveData(selectDayString, selectDay);
                 },)
               ],

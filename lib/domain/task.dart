@@ -1,20 +1,19 @@
 import 'dart:collection';
 import 'package:bp_todo/domain/priority-choices.dart';
-import 'day.dart';
 import 'label.dart';
 
 class Task {
   String title;
   bool isDone;
   Priority priority;
-  DateTime dateTime;
+  String dateTimeString;
   List<Label> labels = [];
   List<String> notes = [];
   List<String> subtasks = [];
   List<String> finishedSubtasks = [];
   bool isCheckedLabel = false;
 
-  Task({this.title, this.isDone = false, this.priority, this.dateTime});
+  Task({this.title, this.isDone = false, this.priority, this.dateTimeString});
 
   void doneTask() {
     isDone = !isDone;

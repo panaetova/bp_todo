@@ -1,10 +1,10 @@
 import 'package:bp_todo/domain/label.dart';
 import 'package:flutter/material.dart';
 
-class LabelWidget extends StatelessWidget {
+class LabelInTaskWidget extends StatelessWidget {
   final List<Label> labels;
 
-  const LabelWidget({Key key, @required this.labels}) : super(key: key);
+  const LabelInTaskWidget({Key key, @required this.labels}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
