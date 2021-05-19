@@ -90,7 +90,7 @@ class _LabelsBodyState extends State<LabelsBody> {
                 itemBuilder: (context, index) {
                   Label label = labelData.labels[index];
                   return CheckboxListTile(
-                      secondary: Icon(Icons.style_outlined),
+                      secondary: Icon(Icons.style_outlined, color: Color(label.color),),
                       title: Text(label.title),
                       activeColor: Color(task.priority.color),
                       value: label.isChecked,
@@ -100,9 +100,10 @@ class _LabelsBodyState extends State<LabelsBody> {
                           if (value) {
                             task.labels.add(label);
                             label.tasks.add(task);
-                          } else
+                          } else {
                             task.labels.remove(label);
                             label.tasks.remove(task);
+                          }
                         });
                       });
                 }

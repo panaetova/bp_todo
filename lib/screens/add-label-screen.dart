@@ -1,3 +1,4 @@
+import 'package:bp_todo/domain/color.dart';
 import 'package:bp_todo/domain/label-data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,12 +10,61 @@ class NewLabelScreen extends StatefulWidget {
 
 class _NewLabelScreenState extends State<NewLabelScreen> {
   String newLabel;
+  bool visibleColors = false;
+  ColorForList newColor = new ColorForList(color: 0xFF808080);
+
+  final List<ColorForList> colors = <ColorForList>[
+    ColorForList(color: 0xFF808080),
+    ColorForList(color: 0xFF6da545),
+    ColorForList(color: 0xFFd5adfb),
+    ColorForList(color: 0xFFf90052),
+    ColorForList(color: 0xFF133072),
+    ColorForList(color: 0xFFd5e6f7),
+    ColorForList(color: 0xFFFF7751),
+    ColorForList(color: 0xFFf9de59),
+  ];
+
+  Iterable<Widget> get getColor sync* {
+    for (final ColorForList color in colors) {
+      yield InkWell(
+        onTap: () {
+          setState(() {
+            for (final ColorForList check in colors) {
+              if (check.isChecked == true) check.isChecked = false;
+            }
+            color.isChecked = !color.isChecked;
+            newColor = color;
+          });
+        },
+        child: color.isChecked
+            ? Container(
+                padding: EdgeInsets.all(8.0),
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                    color: Color(color.color),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.red, width: 2)),
+              )
+            : Container(
+                padding: EdgeInsets.all(8.0),
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  color: Color(color.color),
+                  shape: BoxShape.circle,
+                )),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Color(0xFF737373),
-        height: 150,
+        height: visibleColors ? 210 : 140,
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -23,21 +73,15 @@ class _NewLabelScreenState extends State<NewLabelScreen> {
                 topRight: Radius.circular(10),
               )),
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 10.0),
-            child:
-            Column(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
               children: [
                 Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context)
-                          .size
-                          .width -
-                          65,
+                      width: MediaQuery.of(context).size.width - 65,
                       child: TextField(
-                        style:
-                        TextStyle(fontSize: 20.0),
+                        style: TextStyle(fontSize: 20.0),
                         cursorHeight: 20.0,
                         onChanged: (value) {
                           newLabel = value;
@@ -52,8 +96,13 @@ class _NewLabelScreenState extends State<NewLabelScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            if(newLabel!= null) {
-                              Provider.of<LabelData>(context, listen: false).addLabel(newLabel);
+                            if (newLabel != null) {
+                              if (visibleColors == false) {
+                                Provider.of<LabelData>(context, listen: false)
+                                    .addLabel(newLabel, 0xFF808080);
+                              } else
+                                Provider.of<LabelData>(context, listen: false)
+                                    .addLabel(newLabel, newColor.color);
                               Navigator.of(context).pop();
                             }
                           });
@@ -64,39 +113,30 @@ class _NewLabelScreenState extends State<NewLabelScreen> {
                 ),
                 Divider(),
                 ListTile(
-                    leading: Icon(Icons.palette_outlined, color: Colors.grey,),
+                    leading: visibleColors
+                        ? Icon(
+                            Icons.palette_outlined,
+                            color: Color(newColor.color),
+                          )
+                        : Icon(
+                            Icons.palette_outlined,
+                            color: Color(0xFF808080),
+                          ),
                     title: Text("Color"),
-                    trailing: Icon(Icons.keyboard_arrow_right_outlined),
+                    trailing: visibleColors
+                        ? Icon(Icons.keyboard_arrow_down_outlined)
+                        : Icon(Icons.keyboard_arrow_left_outlined),
                     onTap: () {
-                      return showDialog(context: context, builder: (context) {
-                        return AlertDialog(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Select Color"),
-                              IconButton(
-                                  icon: Icon(
-                                    Icons.close,
-                                    size: 20,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  })
-                            ],
-                          ),
-                          content: Wrap(
-
-                          ),
-                          actions: [
-                            TextButton(onPressed: () =>
-                                Navigator.of(context)
-                                    .pop(),
-                                child: Text("Close"))
-                          ],
-                        );
+                      setState(() {
+                        visibleColors = !visibleColors;
                       });
-                    }
-                )
+                    }),
+                Visibility(
+                    visible: visibleColors,
+                    child: Wrap(
+                      runSpacing: 10.0,
+                      children: getColor.toList(),
+                    ))
               ],
             ),
           ),

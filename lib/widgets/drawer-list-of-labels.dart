@@ -47,7 +47,7 @@ class _DrawerListOfLabelsState extends State<DrawerListOfLabels> {
                 children: [
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 18),
-                      child: Icon(Icons.tag, color: Colors.grey, size: 20)),
+                      child: Icon(Icons.tag, color: Color(label.color), size: 20)),
                   Text(label.title,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
@@ -62,7 +62,7 @@ class _DrawerListOfLabelsState extends State<DrawerListOfLabels> {
                   ),
                   Container(
                     width: 7,
-                    color: Colors.grey,
+                    color: Color(label.color),
                   )
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:bp_todo/domain/task.dart';
+import 'package:flutter/cupertino.dart';
 
 class Label {
   String title;
@@ -6,7 +7,7 @@ class Label {
   bool isChecked = false;
   List<Task> tasks = [];
 
-  Label({this.title, this.color});
+  Label({@required this.title, @required this.color});
 
   void updateLabel(Label label) {
     label.tasks = label.tasks.toSet().toList();

@@ -9,8 +9,8 @@ class LabelData extends ChangeNotifier {
     return UnmodifiableListView(labels);
   }
 
-  void addLabel(String labelName) {
-    Label label = new Label(title: labelName);
+  void addLabel(String labelName, int color) {
+    Label label = new Label(title: labelName, color: color);
     labels.add(label);
     notifyListeners();
   }

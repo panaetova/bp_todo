@@ -11,7 +11,6 @@ class Task {
   List<String> notes = [];
   List<String> subtasks = [];
   List<String> finishedSubtasks = [];
-  bool isCheckedLabel = false;
 
   Task({this.title, this.isDone = false, this.priority, this.dateTimeString});
 
