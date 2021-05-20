@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   final Function toggleScreen;
 
-  const LoginScreen({Key key, this.toggleScreen}) : super(key: key);
+  const RegisterScreen({Key key, this.toggleScreen}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
   final _formKey = GlobalKey<FormState>();
@@ -161,17 +161,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         print("Password: ${_passwordController.text}");
                       }
                     },
-                    child: Text("LOGIN", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+                    child: Text("REGISTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
                 ),
                 SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?", style: TextStyle(fontSize: 18, color: Theme.of(context).primaryColor),),
+                    Text("Already have an account?", style: TextStyle(fontSize: 18, color: Theme.of(context).primaryColor),),
                     SizedBox(),
                     TextButton(
-                      onPressed: () => widget.toggleScreen(),
-                      child: Text(" Register!", style: TextStyle(fontSize: 18, color: Colors.amber),))
+                        onPressed: () => widget.toggleScreen(),
+                        child: Text(" Login!", style: TextStyle(fontSize: 18, color: Colors.amber),))
                   ],
                 )
               ],
