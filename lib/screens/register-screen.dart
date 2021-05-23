@@ -1,4 +1,6 @@
+import 'package:bp_todo/services/auth-services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   final Function toggleScreen;
@@ -30,6 +32,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<AuthServices>(context);
+
     return Scaffold(
       backgroundColor: Color(0xFF55a3d6),
       body: SafeArea(
@@ -148,20 +152,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: MaterialButton(
                     height: 60,
-                    minWidth: double.infinity,
+                    minWidth: loginProvider.isLoading ? null : double.infinity,
                     color: Theme.of(context).primaryColor,
                     textColor: Color(0xFF55a3d6),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     splashColor: Color(0xFFcae6f9),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         print("Email: ${_emailController.text}");
                         print("Password: ${_passwordController.text}");
+                        await loginProvider.register(_emailController.text.trim(), _passwordController.text.trim());
                       }
                     },
-                    child: Text("REGISTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
+                    child: loginProvider.isLoading ? CircularProgressIndicator() :
+                    Text("REGISTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
                 ),
                 SizedBox(height: 20,),
                 Row(
