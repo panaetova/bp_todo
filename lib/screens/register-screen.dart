@@ -164,9 +164,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         print("Email: ${_emailController.text}");
                         print("Password: ${_passwordController.text}");
                         await loginProvider.register(_emailController.text.trim(), _passwordController.text.trim());
+                        FocusScope.of(context).unfocus();
                       }
                     },
-                    child: loginProvider.isLoading ? CircularProgressIndicator() :
+                    child: loginProvider.isLoading ? CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.amberAccent),
+                    ) :
                     Text("REGISTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),),
                 ),
                 SizedBox(height: 20,),
@@ -179,7 +182,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () => widget.toggleScreen(),
                         child: Text(" Login!", style: TextStyle(fontSize: 18, color: Colors.amber),))
                   ],
-                )
+                ),
+                SizedBox(height: 20),
+                if (loginProvider.errorMessage != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    color: Colors.amberAccent,
+                    child: ListTile(
+                      title: Text(loginProvider.errorMessage),
+                      leading: Icon(Icons.error),
+                      trailing: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () => loginProvider.setMessage(null),
+                      ),
+                    )
+                  ),
               ],
             ),
           ),

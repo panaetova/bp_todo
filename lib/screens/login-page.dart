@@ -164,6 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         print("Email: ${_emailController.text}");
                         print("Password: ${_passwordController.text}");
                         await loginProvider.login(_emailController.text.trim(), _passwordController.text.trim());
+                        FocusScope.of(context).unfocus();
                       }
                     },
                     child: loginProvider.isLoading ? CircularProgressIndicator() :

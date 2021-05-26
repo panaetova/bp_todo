@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AuthServices with ChangeNotifier {
   bool _isLoading = false;
   String _errorMessage;
-  bool get isLoading => isLoading;
+  bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 

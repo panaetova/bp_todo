@@ -3,6 +3,9 @@ import 'package:bp_todo/screens/add-project-screen.dart';
 import 'package:bp_todo/widgets/drawer-list-of-labels.dart';
 import 'package:bp_todo/widgets/drawer-list-of-projects.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../services/auth-services.dart';
 
 class DrawerMenu extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<AuthServices>(context);
     return Drawer(
           child: ListView(
             children: <Widget>[
@@ -94,6 +98,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 visible: visibleLabels,
                 child: DrawerListOfLabels(),
               ),
+              InkWell(
+                onTap: () async => await loginProvider.logout(),
+                child: Text("Log Out")),
             ],
           ),
         );}

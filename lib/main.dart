@@ -8,6 +8,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/wrapper.dart';
+import 'screens/wrapper.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
                   primaryColor: Color(0xFFf6f5f5),
                   fontFamily: 'avenir',
                 ),
-                home: Authentication(),
+                home: Wrapper(),
               ),
             );
           } else

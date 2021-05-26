@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'authentication.dart';
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,6 @@ class Wrapper extends StatelessWidget {
     if (user != null) {
       return HomeScreen();
     } else
-      return LoginScreen();
+      return Authentication();
   }
 }
