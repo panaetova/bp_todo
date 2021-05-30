@@ -1,3 +1,5 @@
+import 'package:bp_todo/domain/day-data.dart';
+import 'package:bp_todo/domain/day.dart';
 import 'package:bp_todo/domain/task-data.dart';
 import 'package:bp_todo/domain/task.dart';
 import 'package:bp_todo/screens/data-task-screen.dart';
@@ -6,10 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TaskBody extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<TaskData>(
-        builder: (BuildContext context, TaskData taskData, Widget child) {
+    return Consumer2<TaskData, DayData>(
+        builder: (BuildContext context, TaskData taskData, DayData dayData, Widget child) {
       return Column(
         children: [
           ListView.builder(
@@ -22,18 +25,18 @@ class TaskBody extends StatelessWidget {
                 taskTitle: task.title,
                 isChecked: task.isDone,
                 deletingTask: () {
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 //сделать анимацию ?? удаления
                 pressDoneTask: () {
                   taskData.updateTask(task);
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 pressForData: () {
                   showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => DataTaskScreen(task: task, taskData: taskData,));
+                      builder: (context) => DataTaskScreen(task: task, taskData: taskData, dayData: dayData,));
                 },
                 priority: task.priority, labels: task.labels, dateTimeString: task.dateTimeString,
               );
@@ -49,18 +52,18 @@ class TaskBody extends StatelessWidget {
                 taskTitle: task.title,
                 isChecked: task.isDone,
                 deletingTask: () {
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 //сделать анимацию ?? удаления
                 pressDoneTask: () {
                   taskData.updateTask(task);
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 pressForData: () {
                   showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => DataTaskScreen(task: task, taskData: taskData,));
+                      builder: (context) => DataTaskScreen(task: task, taskData: taskData, dayData: dayData,));
                 },
                 priority: task.priority, labels: task.labels, dateTimeString: task.dateTimeString,
               );
@@ -76,18 +79,18 @@ class TaskBody extends StatelessWidget {
                 taskTitle: task.title,
                 isChecked: task.isDone,
                 deletingTask: () {
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 //сделать анимацию ?? удаления
                 pressDoneTask: () {
                   taskData.updateTask(task);
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 pressForData: () {
                   showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => DataTaskScreen(task: task, taskData: taskData,));
+                      builder: (context) => DataTaskScreen(task: task, taskData: taskData, dayData: dayData,));
                 },
                 priority: task.priority, labels: task.labels, dateTimeString: task.dateTimeString,
               );
@@ -103,18 +106,18 @@ class TaskBody extends StatelessWidget {
                 taskTitle: task.title,
                 isChecked: task.isDone,
                 deletingTask: () {
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 //сделать анимацию ?? удаления
                 pressDoneTask: () {
                   taskData.updateTask(task);
-                  taskData.deleteTask(task);
+                  taskData.deleteTask(task, dayData);
                 },
                 pressForData: () {
                   showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => DataTaskScreen(task: task, taskData: taskData,));
+                      builder: (context) => DataTaskScreen(task: task, taskData: taskData, dayData: dayData,));
                 },
                 priority: task.priority, labels: task.labels, dateTimeString: task.dateTimeString,
               );

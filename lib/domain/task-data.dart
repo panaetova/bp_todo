@@ -1,4 +1,6 @@
 import 'dart:collection';
+import 'package:bp_todo/domain/day-data.dart';
+import 'package:bp_todo/domain/day.dart';
 import 'package:bp_todo/domain/task.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +49,19 @@ class TaskData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteTask(Task task) {
+  void deleteTask(Task task, DayData dayData) {
+    for (final Day day in dayData.days) {
+      if(day.tasksPriority1.contains(task)) {
+        day.tasksPriority1.remove(task);
+      } else if(day.tasksPriority2.contains(task)) {
+        day.tasksPriority2.remove(task);
+      } else if(day.tasksPriority3.contains(task)) {
+        day.tasksPriority3.remove(task);
+      } else if(day.tasksDefault.contains(task)) {
+        day.tasksDefault.remove(task);
+      }
+    }
+
     switch(task.priority.id) {
       case 1:
         tasksPriority1.remove(task);

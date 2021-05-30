@@ -1,3 +1,4 @@
+import 'package:bp_todo/domain/day-data.dart';
 import 'package:bp_todo/domain/priority-choices.dart';
 import 'package:bp_todo/domain/task-data.dart';
 import 'package:bp_todo/domain/task.dart';
@@ -10,20 +11,22 @@ import 'package:flutter/material.dart';
 class DataTaskScreen extends StatefulWidget {
   final Task task;
   final TaskData taskData;
+  final DayData dayData;
 
-  DataTaskScreen({Key key, @required this.task, @required this.taskData}) : super(key: key);
+  DataTaskScreen({Key key, @required this.task, @required this.taskData, @required this.dayData}) : super(key: key);
 
   @override
-  _DataTaskScreenState createState() => _DataTaskScreenState(task, taskData);
+  _DataTaskScreenState createState() => _DataTaskScreenState(task, taskData, dayData);
 }
 
 class _DataTaskScreenState extends State<DataTaskScreen> {
   Task task;
   TaskData taskData;
+  DayData dayData;
   String newNote;
   int iconIndex = 0;
 
-  _DataTaskScreenState(this.task, this.taskData);
+  _DataTaskScreenState(this.task, this.taskData, this.dayData);
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +180,7 @@ class _DataTaskScreenState extends State<DataTaskScreen> {
 
   void choiceAction(Priority priority) {
     setState(() {
-      taskData.deleteTask(task);
+      taskData.deleteTask(task, dayData);
       task.priority = priority;
       taskData.addTask(task);
     });

@@ -1,3 +1,5 @@
+import 'package:bp_todo/domain/day-data.dart';
+import 'package:bp_todo/domain/day.dart';
 import 'package:bp_todo/domain/label-data.dart';
 import 'package:bp_todo/domain/label.dart';
 import 'package:bp_todo/domain/priority-choices.dart';
@@ -32,8 +34,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<LabelData, ProjectData>(
-        builder: (BuildContext context, labelData, projectData, Widget child) {
+    return Consumer3<LabelData, ProjectData, DayData>(
+        builder: (BuildContext context, labelData, projectData, dayData, Widget child) {
       return Container(
         color: Color(0xFF737373),
         height: 180,
@@ -343,15 +345,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         onPressed: () {
                           if (newTaskTitle != null) {
                             Task task = Task(title: newTaskTitle, priority: _priority, dateTimeString: dateTimeString);
+
                             if (newTaskNotes != null) {
                               task.notes.add(newTaskNotes);
                             }
+
                             _labels = _labels.toSet().toList();
                             task.labels = _labels;
                             Provider.of<TaskData>(context, listen: false)
                                 .addTask(task);
+
                             for (final Label label in _labels) {
                               label.tasks.add(task);
+                            }
+
+                            if (dateTime != null) {
+                              Day day = Day(dateTime: dateTime);
+                              if (dayData.days.contains(day)) {
+                                day.addTask(task);
+                              } else {
+                                dayData.days.add(day);
+                                day.addTask(task);
+                              }
                             }
                             Navigator.of(context).pop();
                           }
