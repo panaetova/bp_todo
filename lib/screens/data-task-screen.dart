@@ -44,7 +44,9 @@ class _DataTaskScreenState extends State<DataTaskScreen> {
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.inbox),
-              title: Text("Name of Future Folder"),
+              title: task.dateTimeString != "No Date"
+                  ? Text(task.dateTimeString, style: TextStyle(fontSize: 18, color: Colors.redAccent,))
+                  : Text("Inbox", style: TextStyle(fontSize: 18, color: Colors.blueAccent,)),
               trailing: IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () {

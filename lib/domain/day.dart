@@ -2,13 +2,13 @@ import 'package:bp_todo/domain/task.dart';
 import 'package:flutter/cupertino.dart';
 
 class Day {
-  DateTime dateTime;
+  String date;
   List<Task> tasksPriority1 = [];
   List<Task> tasksPriority2 = [];
   List<Task> tasksPriority3 = [];
   List<Task> tasksDefault = [];
 
-  Day({@required this.dateTime});
+  Day({@required this.date});
 
   void addTask(Task task) {
     switch(task.priority.id) {

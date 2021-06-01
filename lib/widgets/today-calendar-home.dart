@@ -3,6 +3,7 @@ import 'package:bp_todo/domain/day.dart';
 import 'package:bp_todo/widgets/day-calendar-body.dart';
 import 'package:bp_todo/widgets/task-body.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -96,8 +97,9 @@ class _InboxCalendarHomeState extends State<InboxCalendarHome> {
                   TableCalendar(
                       calendarController: controller,
                       onDaySelected: (day, events, dynamics) {
+                        String dayString = DateFormat.MMMMd('en_US').format(day);
                         for (final Day dayInData in days) {
-                          if (day == dayInData.dateTime) {
+                          if (dayString == dayInData.date) {
                             setState(() {
                               dayShow = dayInData;
                             });
