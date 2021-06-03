@@ -8,7 +8,7 @@ class SetDateScreen extends StatelessWidget {
   DateTime tomorrow = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
   DateTime nextWeek = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 7);
 
-  final Function(String, DateTime) receiveData;
+  final Function(String) receiveData;
 
   SetDateScreen({Key key, this.receiveData}) : super(key: key);
 
@@ -39,7 +39,7 @@ class SetDateScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     String tomorrowString = DateFormat.MMMMd('en_US').format(tomorrow);
-                    receiveData(tomorrowString, tomorrow);
+                    receiveData(tomorrowString);
                   },
                   child: Row(
                     children: [
@@ -55,7 +55,7 @@ class SetDateScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     String nextWeekString = DateFormat.MMMMd('en_US').format(nextWeek);
-                    receiveData(nextWeekString, nextWeek);
+                    receiveData(nextWeekString);
                   },
                   child: Row(
                     children: [
@@ -69,7 +69,7 @@ class SetDateScreen extends StatelessWidget {
                 ),
                 Divider(),
                 InkWell(
-                  onTap: () => receiveData("No Date", null),
+                  onTap: () => receiveData("No Date"),
                   child: Row(
                     children: [
                       Icon(Icons.close, color: Colors.grey, size: 22,),
@@ -85,7 +85,7 @@ class SetDateScreen extends StatelessWidget {
                 initialCalendarFormat: CalendarFormat.month,
                 onDaySelected: (DateTime selectDay, events, dynamics) {
                   String selectDayString = DateFormat.MMMMd('en_US').format(selectDay);
-                  receiveData(selectDayString, selectDay);
+                  receiveData(selectDayString);
                 },)
               ],
             ),

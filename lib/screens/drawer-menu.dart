@@ -23,8 +23,20 @@ class _DrawerMenuState extends State<DrawerMenu> {
           child: ListView(
             children: <Widget>[
               DrawerHeader(
-                child: Text("Menu",
-                  style: TextStyle(fontSize: 22, color: Colors.black54),),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Text("Menu",
+                        style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),),
+                    ),
+                    Expanded(child: SizedBox()),
+                    IconButton(
+                        onPressed: () async => await loginProvider.logout(),
+                        icon: Icon(Icons.logout, color: Theme.of(context).primaryColor,))
+                  ],
+                ),
                 decoration: BoxDecoration(
                   color: Color(0xFF55a3d6),
                 ),
@@ -98,9 +110,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 visible: visibleLabels,
                 child: DrawerListOfLabels(),
               ),
-              InkWell(
-                onTap: () async => await loginProvider.logout(),
-                child: Text("Log Out")),
             ],
           ),
         );}

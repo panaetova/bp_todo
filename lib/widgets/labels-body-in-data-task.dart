@@ -119,6 +119,7 @@ class _LabelsBodyState extends State<LabelsBody> {
     for (final Label label in task.labels) {
       yield Chip(
         label: Text(label.title),
+        backgroundColor: Color(label.color),
         onDeleted: () {
           setState(() {
             task.labels

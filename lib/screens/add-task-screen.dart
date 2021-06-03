@@ -20,7 +20,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskTitle;
   String newTaskNotes;
   String dateTimeString = "No Date";
-  DateTime dateTime;
 
   int newColor = 0xFFc1c8c7;
 
@@ -36,11 +35,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return Consumer3<LabelData, ProjectData, DayData>(
         builder: (BuildContext context, labelData, projectData, dayData, Widget child) {
-      return SingleChildScrollView(
+      return Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           color: Color(0xFF737373),
           height: 180,
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -96,73 +95,143 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             ),
                           ),
                           onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) {
-                                  return Container(
-                                      color: Color(0xFF737373),
-                                      height: 300,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            )),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                          child: ListView.builder(
-                                              itemCount: projectData.projects.length,
-                                              scrollDirection: Axis.vertical,
-                                              shrinkWrap: true,
-                                              itemBuilder: (context, index) {
-                                               Project project = projectData.projects[index];
-                                            return Container(
-                                                   height: 60,
-                                                   margin: EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                                                decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                boxShadow: [BoxShadow(
-                                                color: Colors.black.withOpacity(0.03),
-                                                offset: Offset(0,9),
-                                                blurRadius: 20,
-                                                spreadRadius: 1,
-                                                )],
-                                                ),
-                                            child: InkWell(
-                                              onTap: (){
-                                              },
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Container(
-                                                      margin: EdgeInsets.symmetric(horizontal: 10),
-                                                      height: 15,
-                                                      width: 15,
-                                                      decoration: BoxDecoration(
-                                                        color: Color(project.color),
-                                                        shape: BoxShape.circle,
-                                                      )),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: Text(project.title??"null", style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                    )),
+                            if (projectData.projectQuantity != 0) {
+                              showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) {
+                                    return Container(
+                                        color: Color(0xFF737373),
+                                        height: 60.0*projectData.projectQuantity + 100.0,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                topRight: Radius.circular(10),
+                                              )),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.0),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 5.0),
+                                                  child: InkWell(
+                                                  onTap: () => Navigator.of(context).pop(),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 10.0),
+                                                        child: Container(
+                                                            margin: EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 10),
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.blueAccent,
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                            )),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets
+                                                            .all(10.0),
+                                                        child: Text(
+                                                            "Inbox",
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black,
+                                                              fontSize: 16,
+                                                            )),
+                                                      ),
+                                                      Expanded(
+                                                          child: Container()),
+                                                      Container(
+                                                        height: 50,
+                                                        width: 5,
+                                                        color: Colors.blueAccent,
+                                                      )
+                                                    ],
                                                   ),
-                                                  Expanded(child: Container()),
-                                                  Container(
-                                                    height: 50,
-                                                    width: 5,
-                                                    color: Color(project.color),
-                                                  )
-                                                ],
                                               ),
-                                            ));
-                                          }),
-                                        ),
-                                      ));
-                            });
+                                                ),
+                                                ListView.builder(
+                                                    itemCount: projectData.projects
+                                                        .length,
+                                                    scrollDirection: Axis.vertical,
+                                                    shrinkWrap: true,
+                                                    itemBuilder: (context, index) {
+                                                      Project project = projectData
+                                                          .projects[index];
+                                                      return Container(
+                                                          height: 60,
+                                                          margin: EdgeInsets.only(
+                                                              left: 10,
+                                                              top: 5,
+                                                              bottom: 5),
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            boxShadow: [BoxShadow(
+                                                              color: Colors.black
+                                                                  .withOpacity(
+                                                                  0.03),
+                                                              offset: Offset(0, 9),
+                                                              blurRadius: 20,
+                                                              spreadRadius: 1,
+                                                            )
+                                                            ],
+                                                          ),
+                                                          child: InkWell(
+                                                            onTap: () => Navigator.of(context).pop(),
+                                                            child: Row(
+                                                              children: <Widget>[
+                                                                Container(
+                                                                    margin: EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal: 10),
+                                                                    height: 15,
+                                                                    width: 15,
+                                                                    decoration: BoxDecoration(
+                                                                      color: Color(
+                                                                          project
+                                                                              .color),
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    )),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .all(10.0),
+                                                                  child: Text(
+                                                                      project
+                                                                          .title ??
+                                                                          "null",
+                                                                      style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize: 16,
+                                                                      )),
+                                                                ),
+                                                                Expanded(
+                                                                    child: Container()),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 5,
+                                                                  color: Color(
+                                                                      project
+                                                                          .color),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ));
+                                                    }),
+                                              ],
+                                            ),
+                                          ),
+                                        ));
+                                  });
+                            }
                           },
                         ),
                         SizedBox(
@@ -174,10 +243,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               context: context,
                               isScrollControlled: true,
                               builder: (context) => SetDateScreen(
-                                receiveData: (setDateTimeString, setDateTime) {
+                                receiveData: (setDateTimeString) {
                                   setState(() {
                                     dateTimeString = setDateTimeString;
-                                    dateTime = setDateTime;
                                   });
                                   Navigator.of(context).pop();
                                 },
@@ -361,7 +429,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 label.tasks.add(task);
                               }
 
-                              if (dateTime != null) {
+                              if (dateTimeString != "No Data") {
                                 bool check = false;
                                 Day day = Day(date: dateTimeString);
                                 for (final Day dayInData in dayData.days) {

@@ -64,87 +64,90 @@ class _NewProjectScreenState extends State<NewProjectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Color(0xFF737373),
-        height: visibleColors ? 210 : 140,
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              )),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 10.0),
-            child:
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context)
-                          .size
-                          .width -
-                          65,
-                      child: TextField(
-                        style:
-                        TextStyle(fontSize: 20.0),
-                        cursorHeight: 20.0,
-                        onChanged: (value) {
-                          newProjectTitle = value;
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.send,
-                          color: Colors.blueAccent,
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+          color: Color(0xFF737373),
+          height: visibleColors ? 210 : 140,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 10.0),
+              child:
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context)
+                            .size
+                            .width -
+                            65,
+                        child: TextField(
+                          style:
+                          TextStyle(fontSize: 20.0),
+                          cursorHeight: 20.0,
+                          onChanged: (value) {
+                            newProjectTitle = value;
+                          },
                         ),
-                        onPressed: () {
-                          setState(() {
-                            if(newProjectTitle!= null) {
-                              if (visibleColors == false) {
-                                Provider.of<ProjectData>(context, listen: false)
-                                    .createProject(
-                                    newProjectTitle, 0xFF808080);
-                              } else
-                                Provider.of<ProjectData>(context, listen: false)
-                                    .createProject(
-                                    newProjectTitle, newColor.color);
-                              Navigator.of(context).pop();
-                            }
-                          });
-                        },
                       ),
-                    ),
-                  ],
-                ),
-                Divider(),
-                ListTile(
-                    leading: visibleColors
-                        ? Icon(Icons.palette_outlined, color: Color(newColor.color),)
-                      : Icon(Icons.palette_outlined, color: Color(0xFF808080),),
-                    title: Text("Color"),
-                    trailing: visibleColors
-                        ? Icon(Icons.keyboard_arrow_down_outlined)
-                        : Icon(Icons.keyboard_arrow_left_outlined),
-                    onTap: () {
-                      setState(() {
-                        visibleColors = !visibleColors;
-                      });
-                    }
-                ),
-                Visibility(
-                  visible: visibleColors,
-                    child: Wrap(
-                    runSpacing: 10.0,
-                    children: getColor.toList(),
-                ))
-              ],
+                      Expanded(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.send,
+                            color: Colors.blueAccent,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              if(newProjectTitle!= null) {
+                                if (visibleColors == false) {
+                                  Provider.of<ProjectData>(context, listen: false)
+                                      .createProject(
+                                      newProjectTitle, 0xFF808080);
+                                } else
+                                  Provider.of<ProjectData>(context, listen: false)
+                                      .createProject(
+                                      newProjectTitle, newColor.color);
+                                Navigator.of(context).pop();
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  ListTile(
+                      leading: visibleColors
+                          ? Icon(Icons.palette_outlined, color: Color(newColor.color),)
+                        : Icon(Icons.palette_outlined, color: Color(0xFF808080),),
+                      title: Text("Color"),
+                      trailing: visibleColors
+                          ? Icon(Icons.keyboard_arrow_down_outlined)
+                          : Icon(Icons.keyboard_arrow_left_outlined),
+                      onTap: () {
+                        setState(() {
+                          visibleColors = !visibleColors;
+                        });
+                      }
+                  ),
+                  Visibility(
+                    visible: visibleColors,
+                      child: Wrap(
+                      runSpacing: 10.0,
+                      children: getColor.toList(),
+                  ))
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

@@ -21,54 +21,57 @@ class _AddNewSectionScreenState extends State<AddNewSectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Color(0xFF737373),
-        height: 100,
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              )),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child:  Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context)
-                      .size
-                      .width -
-                      65,
-                  child: TextField(
-                    style:
-                    TextStyle(fontSize: 20.0),
-                    cursorHeight: 20.0,
-                    onChanged: (value) {
-                      newSectionName = value;
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.send,
-                      color: Colors.blueAccent,
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+          color: Color(0xFF737373),
+          height: 100,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child:  Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context)
+                        .size
+                        .width -
+                        65,
+                    child: TextField(
+                      style:
+                      TextStyle(fontSize: 20.0),
+                      cursorHeight: 20.0,
+                      onChanged: (value) {
+                        newSectionName = value;
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        if (newSectionName != null) {
-                          Section section = new Section(title: newSectionName);
-                          project.sections.add(section);
-                          Navigator.of(context).pop();
-                        }
-                      });
-                    },
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.send,
+                        color: Colors.blueAccent,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (newSectionName != null) {
+                            Section section = new Section(title: newSectionName);
+                            project.sections.add(section);
+                            Navigator.of(context).pop();
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

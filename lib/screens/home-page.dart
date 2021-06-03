@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text('Tasks', style: TextStyle(color: Colors.white),),
           elevation: 0,
           backgroundColor: Color(0xFF55a3d6),
+          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.more_horiz_outlined),
