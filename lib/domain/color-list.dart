@@ -16,6 +16,8 @@ class _ColorListState extends State<ColorList> {
     ColorForList(color: 0xFFd5e6f7),
     ColorForList(color: 0xFFFF7751),
     ColorForList(color: 0xFFf9de59),
+    ColorForList(color: 0xFFc5a880),
+    ColorForList(color: 0xFF39a6a3)
   ];
 
   Iterable<Widget> get getColor sync* {

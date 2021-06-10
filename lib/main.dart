@@ -3,6 +3,7 @@ import 'package:bp_todo/domain/label-data.dart';
 import 'package:bp_todo/domain/project-data.dart';
 import 'package:bp_todo/domain/task-data.dart';
 import 'package:bp_todo/screens/home-page.dart';
+import 'package:bp_todo/screens/wrapper.dart';
 import 'package:bp_todo/services/auth-services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
                   primaryColor: Color(0xFFf6f5f5),
                   fontFamily: 'avenir',
                 ),
-                home: HomeScreen(),
+                home: Wrapper(),
               ),
             );
           } else

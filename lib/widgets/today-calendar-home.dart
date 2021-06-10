@@ -14,8 +14,8 @@ class InboxCalendarHome extends StatefulWidget {
 
 class _InboxCalendarHomeState extends State<InboxCalendarHome> {
   String filterType = "inbox";
-  Day dayShow;
   DateTime today = new DateTime.now();
+  Day dayShow;
   List<String> monthNames = [
     "JAN",
     "FEB",

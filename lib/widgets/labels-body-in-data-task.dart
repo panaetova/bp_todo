@@ -77,6 +77,9 @@ class _LabelsBodyState extends State<LabelsBody> {
                       setState(() {
                         task.updateLabels();
                         selectLabel = !selectLabel;
+                        for (Label label in labelData.labels) {
+                          label.isChecked = false;
+                        }
                       });
                     },
                     child: Text("Done", style: TextStyle(color: Color(task.priority.color), fontSize: 14),)),

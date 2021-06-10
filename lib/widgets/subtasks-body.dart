@@ -127,55 +127,58 @@ class _SubTasksBodyState extends State<SubTasksBody> {
                           context: context,
                           isScrollControlled: true,
                           builder: (context) {
-                            return Container(
-                                color: Color(0xFF737373),
-                                height: 80,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
-                                      )),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width -
-                                              65,
-                                          child: TextField(
-                                            style:
-                                            TextStyle(fontSize: 20.0),
-                                            cursorHeight: 20.0,
-                                            onChanged: (value) {
-                                              newSubtask = value;
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.send,
-                                              color: Colors.redAccent,
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                              child: Container(
+                                  color: Color(0xFF737373),
+                                  height: 80,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        )),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.0),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width -
+                                                65,
+                                            child: TextField(
+                                              style:
+                                              TextStyle(fontSize: 20.0),
+                                              cursorHeight: 20.0,
+                                              onChanged: (value) {
+                                                newSubtask = value;
+                                              },
                                             ),
-                                            onPressed: () {
-                                              setState(() {
-                                                if(newSubtask!= null) {
-                                                  task.subtasks.add(newSubtask);
-                                                  Navigator.of(context).pop();
-                                                }
-                                              });
-                                            },
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.send,
+                                                color: Colors.redAccent,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  if(newSubtask!= null) {
+                                                    task.subtasks.add(newSubtask);
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ));
+                                  )),
+                            );
                           });
                     }),
                     ListView.builder(

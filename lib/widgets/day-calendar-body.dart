@@ -69,7 +69,6 @@ class _DayCalendarBodyState extends State<DayCalendarBody> {
                 day.deleteTask(task);
                 taskData.deleteTask(task, dayData);
               },
-              //сделать анимацию ?? удаления
               pressDoneTask: () {
                 day.deleteTask(task);
                 taskData.deleteTask(task, dayData);

@@ -97,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextFormField(
                     controller: _emailController,
                     validator: (val) => val.isNotEmpty ? null : "Please enter an email address",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                     decoration: InputDecoration(
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -123,6 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: TextFormField(
                     controller: _passwordController,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                     validator: (val) => val.length < 6 ? "Password must be more than 6 symbols" : null,
                     obscureText: true,
                     decoration: InputDecoration(

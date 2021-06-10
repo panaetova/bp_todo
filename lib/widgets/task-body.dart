@@ -12,7 +12,8 @@ class TaskBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer2<TaskData, DayData>(
-        builder: (BuildContext context, TaskData taskData, DayData dayData, Widget child) {
+        builder: (BuildContext context, TaskData taskData,
+            DayData dayData, Widget child) {
       return Column(
         children: [
           ListView.builder(

@@ -1,4 +1,5 @@
 import 'package:bp_todo/screens/add-task-screen.dart';
+import 'package:bp_todo/screens/find-screen.dart';
 import 'package:bp_todo/widgets/projects-body.dart';
 import 'package:bp_todo/widgets/today-calendar-home.dart';
 import 'package:flutter/material.dart';
@@ -107,10 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // ignore: missing_return
   Widget getBody() {
-    if (sectionIndex == 0) {
+    if (sectionIndex == 0)
       return InboxCalendarHome();
-    } else if (sectionIndex == 1)
+    else if (sectionIndex == 1)
       return ProjectBody();
+    else if (sectionIndex == 2)
+      return FindScreen();
   }
 
   void onTabTaped(int index) {

@@ -422,8 +422,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
                               _labels = _labels.toSet().toList();
                               task.labels = _labels;
-                              Provider.of<TaskData>(context, listen: false)
-                                  .addTask(task);
 
                               for (final Label label in _labels) {
                                 label.tasks.add(task);
@@ -445,6 +443,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   print("created new");
                                 }
                               }
+                              Provider.of<TaskData>(context, listen: false)
+                                  .addTask(task);
                               Navigator.of(context).pop();
                             }
                           },
