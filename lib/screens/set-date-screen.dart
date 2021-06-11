@@ -2,22 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class SetDateScreen extends StatelessWidget {
-  CalendarController controller = new CalendarController();
-  DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  DateTime tomorrow = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
-  DateTime nextWeek = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 7);
-
+class SetDateScreen extends StatefulWidget {
   final Function(String) receiveData;
 
   SetDateScreen({Key key, this.receiveData}) : super(key: key);
 
+  @override
+  _SetDateScreenState createState() => _SetDateScreenState(receiveData);
+}
+
+class _SetDateScreenState extends State<SetDateScreen> {
+  Function(String) recieveData;
+  _SetDateScreenState(this.recieveData);
+  CalendarController controller = new CalendarController();
+
+  DateTime now = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  DateTime tomorrow = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
+  DateTime nextWeek = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 7);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Color(0xFF737373),
-        height: 600,
+        height: 550,
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -39,7 +46,7 @@ class SetDateScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     String tomorrowString = DateFormat.MMMMd('en_US').format(tomorrow);
-                    receiveData(tomorrowString);
+                    widget.receiveData(tomorrowString);
                   },
                   child: Row(
                     children: [
@@ -55,7 +62,7 @@ class SetDateScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     String nextWeekString = DateFormat.MMMMd('en_US').format(nextWeek);
-                    receiveData(nextWeekString);
+                    widget.receiveData(nextWeekString);
                   },
                   child: Row(
                     children: [
@@ -69,7 +76,7 @@ class SetDateScreen extends StatelessWidget {
                 ),
                 Divider(),
                 InkWell(
-                  onTap: () => receiveData("No Date"),
+                  onTap: () => widget.receiveData("No Date"),
                   child: Row(
                     children: [
                       Icon(Icons.close, color: Colors.grey, size: 22,),
@@ -82,10 +89,10 @@ class SetDateScreen extends StatelessWidget {
                 TableCalendar(
                   calendarController: controller,
                   startingDayOfWeek: StartingDayOfWeek.monday,
-                initialCalendarFormat: CalendarFormat.month,
-                onDaySelected: (DateTime selectDay, events, dynamics) {
-                  String selectDayString = DateFormat.MMMMd('en_US').format(selectDay);
-                  receiveData(selectDayString);
+                  initialCalendarFormat: CalendarFormat.month,
+                  onDaySelected: (DateTime selectDay, events, dynamics) {
+                    String selectDayString = DateFormat.MMMMd('en_US').format(selectDay);
+                    widget.receiveData(selectDayString);
                 },)
               ],
             ),
